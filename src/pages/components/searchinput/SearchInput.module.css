@@ -1,0 +1,22 @@
+.search-field-container {
+    position: relative;
+}
+
+.search-field {
+    box-sizing: border-box;
+    width: 100%;
+    height: 75%;
+    border-radius: 8px;
+    border: 1px solid #e4e4e4;
+    padding-left: 2.5rem;
+    outline: 0;
+    font-size: 14px;
+}
+
+.search-icon {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 2.5rem;
+    transform: translate(-0.75rem, -50%);
+}

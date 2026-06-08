@@ -1,0 +1,25 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: #404049;
+}
+
+.navbar > div {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.navbar button {
+    all: unset;
+    cursor: pointer;
+}
+
+.right-nav-item {
+    justify-content: end;
+    gap: 1rem;
+}

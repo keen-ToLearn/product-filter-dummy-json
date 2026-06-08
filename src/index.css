@@ -4,9 +4,6 @@
   --bg: #fff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
@@ -30,8 +27,11 @@
   max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
+  /* 3rem is the height of Navbar */
+  padding-top: 3rem;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
 }
