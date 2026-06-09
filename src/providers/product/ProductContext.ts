@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { type ProductContextType } from './type';
+import { type ProductContextType } from '../type';
 
 // Default Value of the Product Context
 const defaultProductContextValue = {};

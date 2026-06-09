@@ -1,1 +1,2 @@
-export { ProductProvider } from './ProductProvider';
+export * from './product';
+export * from './loader';
