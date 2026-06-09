@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 
 import { SearchInput } from '../searchinput'
+import { CategoryFilter } from '../filters'
 import { ProductContext } from '../../../providers'
 
 import styles from './Drawer.module.css'
@@ -13,6 +14,7 @@ export const Drawer = () => {
             <div className={styles['filter-container']}>
                 <SearchInput placeHolder={'Search...'} />
             </div>
+            <CategoryFilter />
         </aside>
     )
 }
