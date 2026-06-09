@@ -23,10 +23,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 #root {
   max-width: 100%;
   margin: 0 auto;
-  box-sizing: border-box;
   /* 3rem is the height of Navbar */
   padding-top: 3rem;
 }

@@ -2,7 +2,10 @@ import { createContext } from 'react';
 import { type ProductContextType } from '../type';
 
 // Default Value of the Product Context
-const defaultProductContextValue = {};
+const defaultProductContextValue: ProductContextType = {
+    isDrawerOpen: false,
+    toggleDrawer: () => {},
+};
 
 // Exporting the Product Context to be used in Provider file
 export const ProductContext = createContext<ProductContextType>(defaultProductContextValue);

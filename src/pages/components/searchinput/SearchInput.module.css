@@ -1,11 +1,12 @@
 .search-field-container {
+    width: 100%;
     position: relative;
 }
 
 .search-field {
     box-sizing: border-box;
     width: 100%;
-    height: 75%;
+    height: 40px;
     border-radius: 8px;
     border: 1px solid #e4e4e4;
     padding-left: 2.5rem;
@@ -17,6 +18,6 @@
     margin: 0;
     position: absolute;
     top: 50%;
-    left: 2.5rem;
-    transform: translate(-0.75rem, -50%);
+    left: 0.75rem;
+    transform: translateY(-50%);
 }

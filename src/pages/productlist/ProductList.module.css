@@ -1,0 +1,10 @@
+.product-page {
+    display: flex;
+}
+
+.list-box {
+    height: calc(100vh - 3rem);
+    flex-grow: 1;
+    padding: 1rem;
+    transition: width 0.1s ease-in-out;
+}
