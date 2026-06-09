@@ -11,10 +11,14 @@ export const Drawer = () => {
 
     return (
         <aside className={`${styles['filter-drawer']} ${isDrawerOpen ? styles['open'] : ''}`}>
-            <div className={styles['filter-container']}>
-                <SearchInput placeHolder={'Search...'} />
-            </div>
-            <CategoryFilter />
+            {isDrawerOpen && (
+                <>
+                    <div className={styles['filter-container']}>
+                        <SearchInput placeHolder={'Search...'} />
+                    </div>
+                    <CategoryFilter />
+                </>
+            )}
         </aside>
     )
 }

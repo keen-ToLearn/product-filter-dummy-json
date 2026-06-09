@@ -7,7 +7,6 @@ export const ProductProvider = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const toggleDrawer = () => {
-        console.log(!isDrawerOpen)
         setIsDrawerOpen(!isDrawerOpen);
     }
 
