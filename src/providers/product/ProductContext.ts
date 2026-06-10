@@ -5,6 +5,14 @@ import { type ProductContextType } from '../type';
 const defaultProductContextValue: ProductContextType = {
     isDrawerOpen: false,
     toggleDrawer: () => {},
+    productMap: null,
+    updateProductMap: () => {},
+    productFilter: null,
+    resetFilters: () => {},
+    updateFilterQuery: () => {},
+    updateFilterPrice: () => {},
+    updateFilterCategory: () => {},
+    updateFilterBrand: () => {},
 };
 
 // Exporting the Product Context to be used in Provider file

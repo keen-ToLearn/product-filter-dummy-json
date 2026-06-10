@@ -5,8 +5,10 @@ export const getAllProducts = () => fetch(baseEndPoint);
 
 export const getProduct = (productId: string) => fetch(`${baseEndPoint}/${productId}`);
 
+// Add limit, skip, select
 export const getProductsByQuery = (query: string) => fetch(`${baseEndPoint}/search?q=${query}`);
 
+// Accept config instead of parameters
 export const getProductsByRange = (limit: number, skip: number, fields: string) =>
     fetch(`${baseEndPoint}?limit=${limit}&skip=${skip}&select=${fields}`);
 

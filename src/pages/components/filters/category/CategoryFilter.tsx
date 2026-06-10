@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 
-import { AppContext } from '../../../../providers';
+import { AppContext, ProductContext } from '../../../../providers';
 import { getAllCategories } from '../../../../api';
 import { type CategoryResType } from './types';
 
@@ -9,12 +9,11 @@ import styles from './CategoryFilter.module.css';
 
 export const CategoryFilter = () => {
     const { performFetchCall } = useContext(AppContext);
+    const { productFilter, updateFilterCategory } = useContext(ProductContext);
 
     const [categoryList, setCategoryList] = useState<CategoryResType>([]);
 
     useEffect(() => {
-        console.log('Category Filter rendered');
-
         const onCategoryAPISuccess = (data: CategoryResType) => {
             setCategoryList(data);
         }
@@ -25,14 +24,28 @@ export const CategoryFilter = () => {
         });
     }, []);
 
+    const handleCategoryCheck = (isChecked: boolean, category: string) => {
+        const action = isChecked ? 'delete' : 'add';
+        
+        updateFilterCategory(action, category);
+    }
+
     const renderCategoryList = useMemo(() => {
-        return categoryList.map((category, i) => (
-            <div key={`${category.slug}-${i}`} className={styles['category-item']}>
-                <input type='checkbox' name={category.name} />
-                <label>{category.name}</label>
-            </div>
-        ));
-    }, [categoryList]);
+        return categoryList.map((category, i) => {
+            const isChecked = productFilter.categorySet.has(category.slug);
+
+            return (
+                <div
+                    key={`${category.slug}-${i}`}
+                    className={styles['category-item']}
+                    onClick={() => handleCategoryCheck(isChecked, category.slug)}
+                >
+                    <input type='checkbox' name={category.name} checked={isChecked} readOnly />
+                    <label>{category.name}</label>
+                </div>
+            )
+        });
+    }, [categoryList, productFilter.categorySet]);
 
     return (
         <div className={`${filterstyles['filter-container']} ${styles['category-box']}`}>
