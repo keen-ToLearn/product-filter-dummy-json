@@ -13,6 +13,10 @@ export const Drawer = () => {
         <aside className={`${styles['filter-drawer']} ${isDrawerOpen ? styles['open'] : ''}`}>
             {isDrawerOpen && (
                 <>
+                    <div className={styles['filter-head']}>
+                        <h4>Filters</h4>
+                        <button>Clear Filters</button>
+                    </div>
                     <div className={styles['filter-container']}>
                         <SearchInput placeHolder={'Search...'} />
                     </div>

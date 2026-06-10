@@ -1,3 +1,13 @@
-.type-heading {
-    margin: 0;
+.category-box {
+    height: 25%;
+    overflow: auto;
+}
+
+.category-item {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.category-item > label {
+    font-size: 14px;
 }

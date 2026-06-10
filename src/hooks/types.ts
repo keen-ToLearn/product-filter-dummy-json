@@ -1,11 +1,9 @@
 type CallMethodArgsType = string | number;
 
-type SuccessCallArgsType = string | number;
-
-type FetchCallHelperArgsType = {
+type FetchCallHelperArgsType<D> = {
     callMethod: (...args: CallMethodArgsType[]) => Promise<Response>;
     callArgs?: CallMethodArgsType[];
-    successCallback: (...args: SuccessCallArgsType[]) => void;
+    successCallback: (data: D) => void;
 }
 
-export type DoFetchCallFuncType = (helper: FetchCallHelperArgsType) => Promise<void>;
+export type DoFetchCallFuncType = <D>(helper: FetchCallHelperArgsType<D>) => Promise<void>;

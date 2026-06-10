@@ -4,7 +4,7 @@ import { ProductContext } from './ProductContext'
 import { Navbar } from '../../pages'
 
 export const ProductProvider = () => {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);

@@ -3,13 +3,24 @@
     width: 0;
     overflow: hidden;
     overflow-y: auto;
-    background-color: #dcdcdc;
+    background-color: #eaeaea;
     transition: width 0.1s ease-in-out, padding 0.1s ease-in-out;
 }
 
 .filter-drawer.open {
     width: 25vw;
     padding: 0.5rem;
+}
+
+.filter-head {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter-head h4 {
+    margin: 0;
 }
 
 .filter-container {
