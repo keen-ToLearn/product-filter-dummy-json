@@ -3,7 +3,8 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { AppContext, ProductContext } from '../../../../providers';
 import { getAllCategories, getProductsByCategory } from '../../../../api';
 import { type CategoryResType } from './types';
-import { type MapActions, type ProductListRes } from '../../../../types/product';
+import { type ProductListRes } from '../../../../types/product';
+import { MapActions, SetActions } from '../../../../types/enums';
 import { SetToMapAction } from '../helper';
 
 import filterstyles from '../Filter.module.css';
@@ -31,7 +32,7 @@ export const CategoryFilter = () => {
     }
 
     const handleCategoryCheck = (isChecked: boolean, category: string) => {
-        const action = isChecked ? 'delete' : 'add';
+        const action = isChecked ? SetActions.DELETE : SetActions.ADD;
 
         performFetchCall({
             callMethod: getProductsByCategory,

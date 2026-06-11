@@ -8,3 +8,5 @@ export const defaultProductFilter: ProductFilter = {
     priceApplied: false,
     brandSet: new Set<string>(),
 }
+
+export const NoCategory = 'all';

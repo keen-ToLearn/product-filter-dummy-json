@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
 
 import { Navbar } from '../../pages'
@@ -11,16 +11,26 @@ import {
     type QueryUpdaterType
 } from '../../types/filters'
 import {
+    type ProductListRes,
     type ProductMapType,
     type ProductMapUpdaterType,
     type ProductSmallData
 } from '../../types/product'
-import { defaultProductFilter } from './config'
+import { MapActions } from '../../types/enums'
+import { defaultProductFilter, NoCategory } from './config'
+import { useFetchCalls } from '../../hooks'
+import { getProductsByRange } from '../../api'
 
 export const ProductProvider = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [productMap, setProductMap] = useState<ProductMapType>(new Map<string, ProductSmallData[]>());
     const [productFilter, setProductFilter] = useState<ProductFilter>(defaultProductFilter);
+
+    const { performFetchCall } = useFetchCalls();
+
+    useEffect(() => {
+        resetFilters();
+    }, []);
 
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
@@ -28,21 +38,32 @@ export const ProductProvider = () => {
 
     const updateProductMap: ProductMapUpdaterType = (action, category, productList) => {
         setProductMap(productMap => {
-            if (action === 'set') {
+            if (action === MapActions.SET) {
                 productMap[action](category, productList);
-            } else if (action === 'delete') {
+            } else if (action === MapActions.DELETE) {
                 productMap[action](category);
+            } else if (action === MapActions.CLEAR) {
+                productMap[action]();
+                productMap.set(category, productList);
             }
 
             return productMap;
         });
     }
 
+    const onProductRangeAPISuccess = (data: ProductListRes) => {
+        updateProductMap(MapActions.CLEAR, NoCategory, data.products);
+        // commit code add pagination state, defaults, lastFetchMin, lastFetchMax
+    }
+
     const resetFilters = () => {
-        setProductFilter(filters => ({
-            ...defaultProductFilter,
-            query: filters.query,
-        }));
+        setProductFilter(defaultProductFilter);
+
+        performFetchCall({
+            callMethod: getProductsByRange,
+            callArgs: [32, 0],
+            successCallback: onProductRangeAPISuccess,
+        });
     }
 
     const isFilterApplied = () => {
@@ -56,10 +77,10 @@ export const ProductProvider = () => {
     }
 
     const updateFilterQuery: QueryUpdaterType = (query) => {
-        setProductFilter(filters => ({
-            ...filters,
+        setProductFilter({
+            ...defaultProductFilter,
             query
-        }));
+        });
     }
 
     const updateFilterPrice: PriceUpdaterType = (key, price) => {
@@ -77,6 +98,7 @@ export const ProductProvider = () => {
             return {
                 ...filters,
                 categorySet: currentCategorySet,
+                query: defaultProductFilter.query,
             };
         });
     }

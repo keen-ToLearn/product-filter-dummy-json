@@ -1,7 +1,6 @@
-import type { SetActions } from "../../../types/filters";
-import type { MapActions } from "../../../types/product";
+import { MapActions, SetActions } from '../../../types/enums';
 
 export const SetToMapAction: Record<SetActions, MapActions> = {
-    add: 'set',
-    delete: 'delete',
+    [SetActions.ADD]: MapActions.SET,
+    [SetActions.DELETE]: MapActions.DELETE,
 };

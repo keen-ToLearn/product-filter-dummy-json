@@ -1,3 +1,5 @@
+import { MapActions } from './enums';
+
 export interface ProductSmallData {
     id: number;
     title: string;
@@ -8,8 +10,6 @@ export interface ProductSmallData {
 }
 
 export type ProductMapType = Map<string, ProductSmallData[]>
-
-export type MapActions = 'set' | 'delete'
 
 export type ProductMapUpdaterType = (action: MapActions, category: string, productList?: ProductSmallData[]) => void
 

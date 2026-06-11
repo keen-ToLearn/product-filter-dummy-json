@@ -5,7 +5,7 @@ import { Loader } from '../../pages';
 export const LoaderProvider = ({ children }: PropsWithChildren) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const toggleLoader = () => setIsLoading(!isLoading);
+    const toggleLoader = () => setIsLoading(loading => !loading);
 
     return (
         <LoaderContext.Provider value={{ toggleLoader }}>

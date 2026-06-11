@@ -4,8 +4,6 @@ const baseEndPoint = `${baseURI}/products`;
 // Selected product data to fetch for display on List page
 const fieldsToFetch = 'title,thumbnail,price,rating,brand';
 
-export const getAllProducts = () => fetch(`${baseEndPoint}?limit=0&select=${fieldsToFetch}`);
-
 export const getProduct = (productId: string) => fetch(`${baseEndPoint}/${productId}`);
 
 export const getProductsByQuery = (query: string, limit: number, skip: number) =>

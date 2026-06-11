@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 
 import { SearchInput } from '../searchinput'
 import { CategoryFilter } from '../filters'
@@ -7,7 +7,9 @@ import { ProductContext } from '../../../providers'
 import styles from './Drawer.module.css'
 
 export const Drawer = () => {
-    const { isDrawerOpen, resetFilters } = useContext(ProductContext);
+    const { isDrawerOpen, resetFilters, isFilterApplied, productFilter } = useContext(ProductContext);
+
+    const isClearFiltersEnabled = useMemo(() => isFilterApplied(), [productFilter]);
 
     return (
         <aside className={`${styles['filter-drawer']} ${isDrawerOpen ? styles['open'] : ''}`}>
@@ -16,6 +18,7 @@ export const Drawer = () => {
                 <button
                     className='app-btn small all-round'
                     onClick={resetFilters}
+                    disabled={!isClearFiltersEnabled}
                 >
                     Clear Filters
                 </button>

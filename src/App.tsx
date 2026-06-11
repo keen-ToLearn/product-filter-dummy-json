@@ -5,17 +5,17 @@ import { Product, ProductList } from './pages'
 function App() {
   return (
     <ErrorAlertProvider>
-      <AppProvider>
-        <LoaderProvider>
-          <Routes>
-            <Route path='product' element={<ProductProvider />}>
-              <Route index element={<ProductList />} />
-              <Route path=':id' element={<Product />} />
-            </Route>
-            <Route path='*' element={<Navigate to={'/product'} replace />} />
-          </Routes>
-        </LoaderProvider>
-      </AppProvider>
+      <LoaderProvider>
+        <AppProvider>
+            <Routes>
+              <Route path='product' element={<ProductProvider />}>
+                <Route index element={<ProductList />} />
+                <Route path=':id' element={<Product />} />
+              </Route>
+              <Route path='*' element={<Navigate to={'/product'} replace />} />
+            </Routes>
+        </AppProvider>
+      </LoaderProvider>
     </ErrorAlertProvider>
   )
 }
