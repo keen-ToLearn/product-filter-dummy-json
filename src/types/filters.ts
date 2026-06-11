@@ -3,6 +3,7 @@ export type ProductFilter = {
     categorySet: Set<string>;
     minPrice: string;
     maxPrice: string;
+    priceApplied: boolean;
     brandSet: Set<string>;
 }
 
@@ -12,7 +13,7 @@ type PriceKeys = 'minPrice' | 'maxPrice'
 
 export type PriceUpdaterType = (key: PriceKeys, price: string) => void
 
-type SetActions = 'add' | 'delete'
+export type SetActions = 'add' | 'delete'
 
 export type CategoryUpdaterType = (action: SetActions, category: string) => void
 

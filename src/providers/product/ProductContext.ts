@@ -9,6 +9,7 @@ const defaultProductContextValue: ProductContextType = {
     updateProductMap: () => {},
     productFilter: null,
     resetFilters: () => {},
+    isFilterApplied: () => false,
     updateFilterQuery: () => {},
     updateFilterPrice: () => {},
     updateFilterCategory: () => {},

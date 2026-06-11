@@ -5,5 +5,6 @@ export const defaultProductFilter: ProductFilter = {
     categorySet: new Set<string>(),
     minPrice: '',
     maxPrice: '',
+    priceApplied: false,
     brandSet: new Set<string>(),
 }

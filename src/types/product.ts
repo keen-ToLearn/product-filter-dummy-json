@@ -9,6 +9,13 @@ export interface ProductSmallData {
 
 export type ProductMapType = Map<string, ProductSmallData[]>
 
-type MapActions = 'set' | 'delete'
+export type MapActions = 'set' | 'delete'
 
 export type ProductMapUpdaterType = (action: MapActions, category: string, productList?: ProductSmallData[]) => void
+
+export interface ProductListRes {
+    products: ProductSmallData[];
+    limit: number;
+    skip: number;
+    total: number;
+}

@@ -22,6 +22,7 @@ export interface ProductContextType {
     updateProductMap: ProductMapUpdaterType;
     productFilter: ProductFilter;
     resetFilters: () => void;
+    isFilterApplied: () => boolean;
     updateFilterQuery: QueryUpdaterType;
     updateFilterPrice: PriceUpdaterType;
     updateFilterCategory: CategoryUpdaterType;

@@ -45,6 +45,16 @@ export const ProductProvider = () => {
         }));
     }
 
+    const isFilterApplied = () => {
+        const { priceApplied, categorySet, brandSet } = productFilter;
+
+        return (
+            priceApplied ||
+            categorySet.size > 0 ||
+            brandSet.size > 0
+        )
+    }
+
     const updateFilterQuery: QueryUpdaterType = (query) => {
         setProductFilter(filters => ({
             ...filters,
@@ -91,6 +101,7 @@ export const ProductProvider = () => {
             updateProductMap,
             productFilter,
             resetFilters,
+            isFilterApplied,
             updateFilterQuery,
             updateFilterPrice,
             updateFilterCategory,

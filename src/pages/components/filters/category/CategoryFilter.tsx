@@ -1,15 +1,17 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { AppContext, ProductContext } from '../../../../providers';
-import { getAllCategories } from '../../../../api';
+import { getAllCategories, getProductsByCategory } from '../../../../api';
 import { type CategoryResType } from './types';
+import { type MapActions, type ProductListRes } from '../../../../types/product';
 
 import filterstyles from '../Filter.module.css';
 import styles from './CategoryFilter.module.css';
+import { SetToMapAction } from '../helper';
 
 export const CategoryFilter = () => {
     const { performFetchCall } = useContext(AppContext);
-    const { productFilter, updateFilterCategory } = useContext(ProductContext);
+    const { productFilter, updateFilterCategory, updateProductMap } = useContext(ProductContext);
 
     const [categoryList, setCategoryList] = useState<CategoryResType>([]);
 
@@ -24,10 +26,21 @@ export const CategoryFilter = () => {
         });
     }, []);
 
+    const onProductByCategoryAPISuccess = (data: ProductListRes, action: MapActions, category: string) => {
+        updateProductMap(action, category, data.products);
+    }
+
     const handleCategoryCheck = (isChecked: boolean, category: string) => {
         const action = isChecked ? 'delete' : 'add';
         
         updateFilterCategory(action, category);
+        performFetchCall({
+            callMethod: getProductsByCategory,
+            callArgs: [ category ],
+            successCallback: (data: ProductListRes) => {
+                onProductByCategoryAPISuccess(data, SetToMapAction[action], category)
+            }
+        });
     }
 
     const renderCategoryList = useMemo(() => {

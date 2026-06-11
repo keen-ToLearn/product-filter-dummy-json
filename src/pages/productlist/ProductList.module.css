@@ -5,6 +5,8 @@
 .list-box {
     height: calc(100vh - 3rem);
     flex-grow: 1;
+    max-width: 75vw;
+    overflow-y: auto;
     padding: 1rem;
     transition: width 0.1s ease-in-out;
 }

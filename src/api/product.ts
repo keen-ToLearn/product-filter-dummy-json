@@ -1,18 +1,20 @@
 const baseURI = 'https://dummyjson.com';
 const baseEndPoint = `${baseURI}/products`;
 
-export const getAllProducts = () => fetch(baseEndPoint);
+// Selected product data to fetch for display on List page
+const fieldsToFetch = 'title,thumbnail,price,rating,brand';
+
+export const getAllProducts = () => fetch(`${baseEndPoint}?limit=0&select=${fieldsToFetch}`);
 
 export const getProduct = (productId: string) => fetch(`${baseEndPoint}/${productId}`);
 
-// Add limit, skip, select
-export const getProductsByQuery = (query: string) => fetch(`${baseEndPoint}/search?q=${query}`);
+export const getProductsByQuery = (query: string, limit: number, skip: number) =>
+    fetch(`${baseEndPoint}/search?q=${query}&limit=${limit}&skip=${skip}&select=${fieldsToFetch}`);
 
-// Accept config instead of parameters
-export const getProductsByRange = (limit: number, skip: number, fields: string) =>
-    fetch(`${baseEndPoint}?limit=${limit}&skip=${skip}&select=${fields}`);
+export const getProductsByRange = (limit: number, skip: number) =>
+    fetch(`${baseEndPoint}?limit=${limit}&skip=${skip}&select=${fieldsToFetch}`);
 
 export const getAllCategories = () => fetch(`${baseEndPoint}/categories`);
 
 export const getProductsByCategory = (category: string) =>
-    fetch(`${baseEndPoint}/category/${category}`);
+    fetch(`${baseEndPoint}/category/${category}?select=${fieldsToFetch}`);
