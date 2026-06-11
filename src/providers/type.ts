@@ -32,3 +32,7 @@ export interface ProductContextType {
 export interface LoaderContextType {
     toggleLoader: () => void;
 }
+
+export interface ErrorAlertContextType {
+    showErrorMessage: (message: string) => void;
+}

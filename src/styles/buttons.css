@@ -1,0 +1,34 @@
+.app-btn {
+    border: 1px solid #a8a8a8;
+    background: #f8f8f8;
+    color: #383838;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.app-btn.all-round {
+    border-radius: 8px;
+}
+
+.app-btn.left-round {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.app-btn.right-round {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.app-btn.large {
+    padding: 12px 20px;
+}
+
+.app-btn.small {
+    padding: 6px 10px;
+}
+
+.app-btn.error-btn {
+    border-color: var(--error);
+    color: var(--error);
+}

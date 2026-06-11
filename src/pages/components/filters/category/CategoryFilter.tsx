@@ -4,10 +4,10 @@ import { AppContext, ProductContext } from '../../../../providers';
 import { getAllCategories, getProductsByCategory } from '../../../../api';
 import { type CategoryResType } from './types';
 import { type MapActions, type ProductListRes } from '../../../../types/product';
+import { SetToMapAction } from '../helper';
 
 import filterstyles from '../Filter.module.css';
 import styles from './CategoryFilter.module.css';
-import { SetToMapAction } from '../helper';
 
 export const CategoryFilter = () => {
     const { performFetchCall } = useContext(AppContext);
@@ -32,13 +32,13 @@ export const CategoryFilter = () => {
 
     const handleCategoryCheck = (isChecked: boolean, category: string) => {
         const action = isChecked ? 'delete' : 'add';
-        
-        updateFilterCategory(action, category);
+
         performFetchCall({
             callMethod: getProductsByCategory,
             callArgs: [ category ],
             successCallback: (data: ProductListRes) => {
-                onProductByCategoryAPISuccess(data, SetToMapAction[action], category)
+                updateFilterCategory(action, category);
+                onProductByCategoryAPISuccess(data, SetToMapAction[action], category);
             }
         });
     }

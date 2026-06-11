@@ -4,7 +4,7 @@ import styles from './Loader.module.css';
 
 export const Loader = () => {
     return (
-        <div className={styles['loader-overlay']}>
+        <div className='overlay'>
             <div className={styles['loader-box']}>
                 <FontAwesomeIcon icon={faCircleNotch} spin size={'3x'} />
                 <h4>Loading</h4>

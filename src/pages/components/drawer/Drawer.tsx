@@ -7,22 +7,23 @@ import { ProductContext } from '../../../providers'
 import styles from './Drawer.module.css'
 
 export const Drawer = () => {
-    const { isDrawerOpen } = useContext(ProductContext);
+    const { isDrawerOpen, resetFilters } = useContext(ProductContext);
 
     return (
         <aside className={`${styles['filter-drawer']} ${isDrawerOpen ? styles['open'] : ''}`}>
-            {isDrawerOpen && (
-                <>
-                    <div className={styles['filter-head']}>
-                        <h4>Filters</h4>
-                        <button>Clear Filters</button>
-                    </div>
-                    <div className={styles['filter-container']}>
-                        <SearchInput placeHolder={'Search...'} />
-                    </div>
-                    <CategoryFilter />
-                </>
-            )}
+            <div className={styles['filter-head']}>
+                <h4>Filters</h4>
+                <button
+                    className='app-btn small all-round'
+                    onClick={resetFilters}
+                >
+                    Clear Filters
+                </button>
+            </div>
+            <div className={styles['filter-container']}>
+                <SearchInput placeHolder={'Search...'} />
+            </div>
+            <CategoryFilter />
         </aside>
     )
 }
