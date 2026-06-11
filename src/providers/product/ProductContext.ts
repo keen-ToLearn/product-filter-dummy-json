@@ -14,6 +14,7 @@ const defaultProductContextValue: ProductContextType = {
     updateFilterPrice: () => {},
     updateFilterCategory: () => {},
     updateFilterBrand: () => {},
+    updateProductPageConfig: () => {},
 };
 
 // Exporting the Product Context to be used in Provider file

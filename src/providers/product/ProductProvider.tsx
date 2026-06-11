@@ -4,11 +4,13 @@ import { Outlet } from 'react-router'
 import { Navbar } from '../../pages'
 import { ProductContext } from './ProductContext'
 import {
+    type PageConfigType,
     type BrandUpdaterType,
     type CategoryUpdaterType,
     type PriceUpdaterType,
     type ProductFilter,
-    type QueryUpdaterType
+    type QueryUpdaterType,
+    type PageConfigUpdaterType
 } from '../../types/filters'
 import {
     type ProductListRes,
@@ -20,11 +22,13 @@ import { MapActions } from '../../types/enums'
 import { defaultProductFilter, NoCategory } from './config'
 import { useFetchCalls } from '../../hooks'
 import { getProductsByRange } from '../../api'
+import { defaultProductPageConfig, getSkipCount } from '../../utils'
 
 export const ProductProvider = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [productMap, setProductMap] = useState<ProductMapType>(new Map<string, ProductSmallData[]>());
     const [productFilter, setProductFilter] = useState<ProductFilter>(defaultProductFilter);
+    const [pageConfig, setPageConfig] = useState<PageConfigType>(defaultProductPageConfig);
 
     const { performFetchCall } = useFetchCalls();
 
@@ -51,9 +55,12 @@ export const ProductProvider = () => {
         });
     }
 
-    const onProductRangeAPISuccess = (data: ProductListRes) => {
+    const onResetProductAPISuccess = (data: ProductListRes) => {
+        updateProductPageConfig({
+            ...defaultProductPageConfig,
+            total: data.total,
+        });
         updateProductMap(MapActions.CLEAR, NoCategory, data.products);
-        // commit code add pagination state, defaults, lastFetchMin, lastFetchMax
     }
 
     const resetFilters = () => {
@@ -61,8 +68,8 @@ export const ProductProvider = () => {
 
         performFetchCall({
             callMethod: getProductsByRange,
-            callArgs: [32, 0],
-            successCallback: onProductRangeAPISuccess,
+            callArgs: [ pageConfig.limit, getSkipCount(pageConfig.active) ],
+            successCallback: onResetProductAPISuccess,
         });
     }
 
@@ -115,6 +122,13 @@ export const ProductProvider = () => {
         });
     }
 
+    const updateProductPageConfig: PageConfigUpdaterType = (portion) => {
+        setPageConfig(config => ({
+            ...config,
+            ...portion,
+        }));
+    }
+
     return (
         <ProductContext.Provider value={{
             isDrawerOpen,
@@ -128,6 +142,7 @@ export const ProductProvider = () => {
             updateFilterPrice,
             updateFilterCategory,
             updateFilterBrand,
+            updateProductPageConfig,
         }}>
             {/* Navbar imported specifically in Product Provider only due to limited assignment scope */}
             <Navbar />

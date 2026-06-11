@@ -2,6 +2,7 @@ import { type DoFetchCallFuncType } from '../hooks';
 import {
     type BrandUpdaterType,
     type CategoryUpdaterType,
+    type PageConfigUpdaterType,
     type PriceUpdaterType,
     type ProductFilter,
     type QueryUpdaterType
@@ -27,6 +28,7 @@ export interface ProductContextType {
     updateFilterPrice: PriceUpdaterType;
     updateFilterCategory: CategoryUpdaterType;
     updateFilterBrand: BrandUpdaterType;
+    updateProductPageConfig: PageConfigUpdaterType;
 }
 
 export interface LoaderContextType {

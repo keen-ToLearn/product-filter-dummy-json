@@ -1,4 +1,4 @@
-import { SetActions } from './enums';
+import { PriceKeys, SetActions } from './enums';
 
 export type ProductFilter = {
     query: string;
@@ -11,10 +11,18 @@ export type ProductFilter = {
 
 export type QueryUpdaterType = (query: string) => void
 
-type PriceKeys = 'minPrice' | 'maxPrice'
-
 export type PriceUpdaterType = (key: PriceKeys, price: string) => void
 
 export type CategoryUpdaterType = (action: SetActions, category: string) => void
 
 export type BrandUpdaterType = (action: SetActions, brand: string) => void
+
+export type PageConfigType = {
+    total: number;
+    active: number;
+    lastFetchMin: number;
+    lastFetchMax: number;
+    limit: number;
+}
+
+export type PageConfigUpdaterType = (portion: Partial<PageConfigType>) => void
