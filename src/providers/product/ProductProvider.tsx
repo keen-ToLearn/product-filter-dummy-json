@@ -20,8 +20,8 @@ import {
 } from '../../types/product'
 import { MapActions } from '../../types/enums'
 import { defaultProductFilter, NoCategory } from './config'
-import { useFetchCalls } from '../../hooks'
-import { getProductsByRange } from '../../api'
+import { useDebounce, useFetchCalls } from '../../hooks'
+import { getProductsByQuery, getProductsByRange } from '../../api'
 import { defaultProductPageConfig, getSkipCount } from '../../utils'
 
 export const ProductProvider = () => {
@@ -31,6 +31,7 @@ export const ProductProvider = () => {
     const [pageConfig, setPageConfig] = useState<PageConfigType>(defaultProductPageConfig);
 
     const { performFetchCall } = useFetchCalls();
+    const debouncer = useDebounce();
 
     useEffect(() => {
         resetFilters();
@@ -68,7 +69,7 @@ export const ProductProvider = () => {
 
         performFetchCall({
             callMethod: getProductsByRange,
-            callArgs: [ pageConfig.limit, getSkipCount(pageConfig.active) ],
+            callArgs: [ pageConfig.limit, getSkipCount(defaultProductPageConfig.active) ],
             successCallback: onResetProductAPISuccess,
         });
     }
@@ -88,6 +89,14 @@ export const ProductProvider = () => {
             ...defaultProductFilter,
             query
         });
+
+        const fetchQueryProductArgs = {
+            callMethod: getProductsByQuery,
+            callArgs: [ query, pageConfig.limit, getSkipCount(defaultProductPageConfig.active) ],
+            successCallback: onResetProductAPISuccess,
+        };
+
+        debouncer(performFetchCall, 1000, fetchQueryProductArgs);
     }
 
     const updateFilterPrice: PriceUpdaterType = (key, price) => {

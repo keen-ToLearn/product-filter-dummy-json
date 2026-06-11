@@ -19,6 +19,7 @@ export const SearchInput = ({ placeHolder }: SearchInputProps) => {
                 placeholder={placeHolder}
                 value={productFilter.query}
                 onChange={(event) => updateFilterQuery(event.target.value)}
+                autoComplete='off'
             />
             <figure className={styles['search-icon']}>
                 <FontAwesomeIcon role={'button'} icon={faSearch} />

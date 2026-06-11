@@ -18,6 +18,10 @@ export const useFetchCalls = () => {
             const response = await callMethod(...(callArgs ?? []));
             const data = await response.json();
 
+            if (!response.ok) {
+                throw new Error(data.message);
+            }
+
             successCallback(data);
         } catch (error) {
             if (error.message) {
