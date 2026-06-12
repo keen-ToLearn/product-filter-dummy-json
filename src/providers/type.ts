@@ -3,6 +3,7 @@ import {
     type AppliedPriceUpdaterType,
     type BrandUpdaterType,
     type CategoryUpdaterType,
+    type PageConfigType,
     type PageConfigUpdaterType,
     type PriceUpdaterType,
     type ProductFilter,
@@ -30,6 +31,7 @@ export interface ProductContextType {
     updateAppliedFilterPrice: AppliedPriceUpdaterType;
     updateFilterCategory: CategoryUpdaterType;
     updateFilterBrand: BrandUpdaterType;
+    pageConfig: PageConfigType;
     updateProductPageConfig: PageConfigUpdaterType;
 }
 

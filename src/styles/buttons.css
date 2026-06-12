@@ -1,6 +1,6 @@
 .app-btn {
-    border: 1px solid #a8a8a8;
-    background: #f8f8f8;
+    border: 1px solid var(--border);
+    background: var(--float-bg);
     color: #383838;
     font-weight: 14px;
     font-weight: 600;
@@ -32,4 +32,10 @@
 .app-btn.error-btn {
     border-color: var(--error);
     color: var(--error);
+}
+
+.app-btn.primary-btn {
+    border-color: #0d6efd;
+    background-color: #0d6efd;
+    color: #ffffff;
 }

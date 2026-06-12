@@ -13,5 +13,3 @@ export const defaultProductFilter: ProductFilter = {
     brandSet: new Set<string>(),
     brandCount: 0,
 }
-
-export const NoCategory = 'all';

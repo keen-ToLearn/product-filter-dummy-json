@@ -1,0 +1,1 @@
+export { ProductRenderer } from './ProductRenderer'

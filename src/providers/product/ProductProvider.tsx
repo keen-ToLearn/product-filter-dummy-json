@@ -20,10 +20,10 @@ import {
     type ProductSmallData
 } from '../../types/product'
 import { MapActions } from '../../types/enums'
-import { defaultProductFilter, NoCategory } from './config'
+import { defaultProductFilter } from './config'
 import { useDebounce, useFetchCalls } from '../../hooks'
 import { getProductsByQuery, getProductsByRange } from '../../api'
-import { defaultProductPageConfig, getSkipCount } from '../../utils'
+import { defaultProductPageConfig, getSkipCount, NoCategory } from '../../utils'
 
 export const ProductProvider = () => {
     const isMounted = useRef<boolean>(false);
@@ -57,16 +57,18 @@ export const ProductProvider = () => {
 
     const updateProductMap: ProductMapUpdaterType = (action, category, productList) => {
         setProductMap(productMap => {
+            const currentProductMap = new Map(productMap);
+
             if (action === MapActions.SET) {
-                productMap[action](category, productList);
+                currentProductMap[action](category, productList);
             } else if (action === MapActions.DELETE) {
-                productMap[action](category);
+                currentProductMap[action](category);
             } else if (action === MapActions.CLEAR) {
-                productMap[action]();
-                productMap.set(category, productList);
+                currentProductMap[action]();
+                currentProductMap.set(category, productList);
             }
 
-            return productMap;
+            return currentProductMap;
         });
     }
 
@@ -89,12 +91,12 @@ export const ProductProvider = () => {
     }
 
     const isFilterApplied = () => {
-        const { priceApplied, categorySet, brandSet } = productFilter;
+        const { priceApplied, categoryCount, brandCount } = productFilter;
 
         return (
             priceApplied.minPrice <= priceApplied.maxPrice ||
-            categorySet.size > 0 ||
-            brandSet.size > 0
+            categoryCount > 0 ||
+            brandCount > 0
         )
     }
 
@@ -175,6 +177,7 @@ export const ProductProvider = () => {
             updateAppliedFilterPrice,
             updateFilterCategory,
             updateFilterBrand,
+            pageConfig,
             updateProductPageConfig,
         }}>
             {/* Navbar imported specifically in Product Provider only due to limited assignment scope */}

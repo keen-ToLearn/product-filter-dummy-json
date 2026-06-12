@@ -11,3 +11,15 @@ export const defaultProductPageConfig: PageConfigType = {
 }
 
 export const getSkipCount = (now: number) => Math.max((now - 1), 0) * PerPage
+
+export const getDataRangeForPage = (now: number) => {
+    const start = (now - 1) * PerPage
+    const end = now * PerPage
+    const range: number[] = []
+
+    for (let i = start; i < end; i++) {
+        range.push(i)
+    }
+
+    return range
+}
