@@ -1,5 +1,6 @@
 import { type DoFetchCallFuncType } from '../hooks';
 import {
+    type AppliedPriceUpdaterType,
     type BrandUpdaterType,
     type CategoryUpdaterType,
     type PageConfigUpdaterType,
@@ -26,6 +27,7 @@ export interface ProductContextType {
     isFilterApplied: () => boolean;
     updateFilterQuery: QueryUpdaterType;
     updateFilterPrice: PriceUpdaterType;
+    updateAppliedFilterPrice: AppliedPriceUpdaterType;
     updateFilterCategory: CategoryUpdaterType;
     updateFilterBrand: BrandUpdaterType;
     updateProductPageConfig: PageConfigUpdaterType;

@@ -38,7 +38,18 @@ export const CategoryFilter = () => {
         updateProductMap(action, category, data.products);
     }
 
+    const handleCategoryUncheck = (category: string) => {
+        updateFilterCategory(SetActions.DELETE, category);
+        updateProductPageConfig(defaultProductPageConfig);
+        updateProductMap(SetToMapAction[SetActions.DELETE], category);
+    }
+
     const handleCategoryCheck = (isChecked: boolean, category: string) => {
+        if (isChecked) {
+            handleCategoryUncheck(category);
+            return;
+        }
+
         const action = isChecked ? SetActions.DELETE : SetActions.ADD;
 
         performFetchCall({

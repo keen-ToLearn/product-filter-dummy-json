@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Outlet } from 'react-router'
 
 import { Navbar } from '../../pages'
@@ -10,7 +10,8 @@ import {
     type PriceUpdaterType,
     type ProductFilter,
     type QueryUpdaterType,
-    type PageConfigUpdaterType
+    type PageConfigUpdaterType,
+    type AppliedPriceUpdaterType
 } from '../../types/filters'
 import {
     type ProductListRes,
@@ -25,6 +26,8 @@ import { getProductsByQuery, getProductsByRange } from '../../api'
 import { defaultProductPageConfig, getSkipCount } from '../../utils'
 
 export const ProductProvider = () => {
+    const isMounted = useRef<boolean>(false);
+
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [productMap, setProductMap] = useState<ProductMapType>(new Map<string, ProductSmallData[]>());
     const [productFilter, setProductFilter] = useState<ProductFilter>(defaultProductFilter);
@@ -36,6 +39,17 @@ export const ProductProvider = () => {
     useEffect(() => {
         resetFilters();
     }, []);
+
+    useEffect(() => {
+        if (!isMounted.current) {
+            isMounted.current = true;
+            return;
+        }
+
+        if (productFilter.categoryCount === 0) {
+            resetFilters();
+        }
+    }, [productFilter.categoryCount]);
 
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
@@ -78,7 +92,7 @@ export const ProductProvider = () => {
         const { priceApplied, categorySet, brandSet } = productFilter;
 
         return (
-            priceApplied ||
+            priceApplied.minPrice <= priceApplied.maxPrice ||
             categorySet.size > 0 ||
             brandSet.size > 0
         )
@@ -106,6 +120,13 @@ export const ProductProvider = () => {
         }));
     }
 
+    const updateAppliedFilterPrice: AppliedPriceUpdaterType = (applied) => {
+        setProductFilter(filters => ({
+            ...filters,
+            priceApplied: applied,
+        }))
+    }
+
     const updateFilterCategory: CategoryUpdaterType = (action, category) => {
         setProductFilter(filters => {
             const currentCategorySet = new Set(filters.categorySet);
@@ -114,6 +135,7 @@ export const ProductProvider = () => {
             return {
                 ...filters,
                 categorySet: currentCategorySet,
+                categoryCount: currentCategorySet.size,
                 query: defaultProductFilter.query,
             };
         });
@@ -127,6 +149,7 @@ export const ProductProvider = () => {
             return {
                 ...filters,
                 brandSet: currentBrandSet,
+                brandCount: currentBrandSet.size,
             };
         });
     }
@@ -149,6 +172,7 @@ export const ProductProvider = () => {
             isFilterApplied,
             updateFilterQuery,
             updateFilterPrice,
+            updateAppliedFilterPrice,
             updateFilterCategory,
             updateFilterBrand,
             updateProductPageConfig,

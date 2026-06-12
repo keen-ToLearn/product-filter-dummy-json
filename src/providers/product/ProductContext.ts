@@ -12,6 +12,7 @@ const defaultProductContextValue: ProductContextType = {
     isFilterApplied: () => false,
     updateFilterQuery: () => {},
     updateFilterPrice: () => {},
+    updateAppliedFilterPrice: () => {},
     updateFilterCategory: () => {},
     updateFilterBrand: () => {},
     updateProductPageConfig: () => {},
