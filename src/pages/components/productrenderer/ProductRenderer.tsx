@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import { ProductCard } from '../productcard'
+import { Pagination } from '../pagination'
 import { ProductContext } from '../../../providers'
-import { type ProductSmallData } from '../../../types/product'
-import { getDataRangeForPage, NoCategory } from '../../../utils'
+import { type ProductListRes, type ProductSmallData } from '../../../types/product'
+import { getDataRangeForPage, getPageFetchRange, NoCategory, PerPage, VisiblePageCount } from '../../../utils'
+import { useFetchCalls } from '../../../hooks'
+import { getProductsByQuery } from '../../../api'
 
 import styles from './ProductRenderer.module.css'
+import { MapActions } from '../../../types/enums'
 
 export const ProductRenderer = () => {
-// Rendering Logic
-// Pagination Invoke
-// Provide page change handler to pagination
     const [products, setProducts] = useState<ProductSmallData[]>([])
 
     const {
@@ -18,7 +19,11 @@ export const ProductRenderer = () => {
         productFilter,
         pageConfig,
         isFilterApplied,
+        updateProductPageConfig,
+        updateProductMap,
     } = useContext(ProductContext)
+
+    const { performFetchCall } = useFetchCalls()
 
     useEffect(() => {
         let newProducts: ProductSmallData[] = []
@@ -61,9 +66,49 @@ export const ProductRenderer = () => {
             }
         }
 
-        setProducts(newProducts.reverse())
-        // setProducts(newProducts)
+        setProducts(newProducts)
     }, [productMap, productFilter])
+
+    const onProductPageAPISuccess = (data: ProductSmallData[], limit: number, skip: number) => {
+        const allProducts = productMap.get(NoCategory)
+        const updatedAllProducts = [
+            ...allProducts.slice(0, skip),
+            ...data,
+            ...allProducts.slice(limit + skip),
+        ]
+        updateProductMap(MapActions.SET, NoCategory, updatedAllProducts)
+    }
+
+    const handlePageChange = (now: number) => {
+        if (now === pageConfig.active) {
+            return
+        }
+
+        updateProductPageConfig({
+            active: now,
+        })
+
+        if (!isFilterApplied()) {
+            const { active, total } = pageConfig
+
+            const lastPageForActive = Math.ceil(products.length / PerPage)
+            const lastPageForNow = Math.ceil(total / PerPage)
+            
+            const { limit, skip } = getPageFetchRange(active, now, lastPageForActive, lastPageForNow, VisiblePageCount)
+
+            // If limit and skip are 0 then no data can be fetched
+            if (limit !== 0 && skip !== 0) {
+                performFetchCall({
+                    callMethod: getProductsByQuery,
+                    callArgs: [ productFilter.query, limit, skip ],
+                    successCallback: (data: ProductListRes) => {
+                        onProductPageAPISuccess(data.products, data.limit, skip)
+                    },
+                    silent: true,
+                })
+            }
+        }
+    }
 
     if (products.length === 0) {
         return (
@@ -101,6 +146,14 @@ export const ProductRenderer = () => {
 
     return (
         <div>
+            <div className={styles['page-box']}>
+                <Pagination
+                    active={pageConfig.active}
+                    visible={VisiblePageCount}
+                    last={Math.ceil(products.length / PerPage)}
+                    handlePageChange={handlePageChange}
+                />
+            </div>
             <div className={styles['product-box']}>
                 {renderProductList}
             </div>

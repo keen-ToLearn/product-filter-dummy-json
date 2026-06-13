@@ -25,7 +25,7 @@ export const ProductCard = ({
     }
 
     return (
-        <button type='button' className={styles['product-card']} onClick={() => navigate(id)}>
+        <button type='button' className={styles['product-card']} onClick={() => navigate(id.toString())}>
             <figure className={styles['card-image-box']}>
                 <img src={imageURI} alt={title} />
             </figure>

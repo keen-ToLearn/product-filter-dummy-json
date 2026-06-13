@@ -16,7 +16,7 @@ export const Drawer = () => {
             <div className={styles['filter-head']}>
                 <h4>Filters</h4>
                 <button
-                    className='app-btn small all-round'
+                    className={`app-btn small all-round ${!isClearFiltersEnabled ? 'disabled' : ''}`}
                     onClick={resetFilters}
                     disabled={!isClearFiltersEnabled}
                 >

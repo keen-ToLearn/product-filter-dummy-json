@@ -11,9 +11,12 @@ export const useFetchCalls = () => {
         callMethod,
         callArgs,
         successCallback,
+        silent,
     }) => {
         try {
-            toggleLoader();
+            if (!silent) {
+                toggleLoader();
+            }
 
             const response = await callMethod(...(callArgs ?? []));
             const data = await response.json();
@@ -24,11 +27,13 @@ export const useFetchCalls = () => {
 
             successCallback(data);
         } catch (error) {
-            if (error.message) {
+            if (!silent && error.message) {
                 showErrorMessage(error.message);
             }
         } finally {
-            toggleLoader();
+            if (!silent) {
+                toggleLoader();
+            }
         }
     }
 

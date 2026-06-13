@@ -23,7 +23,7 @@ import { MapActions } from '../../types/enums'
 import { defaultProductFilter } from './config'
 import { useDebounce, useFetchCalls } from '../../hooks'
 import { getProductsByQuery, getProductsByRange } from '../../api'
-import { defaultProductPageConfig, getSkipCount, NoCategory } from '../../utils'
+import { DefaultFetchSize, defaultProductPageConfig, getSkipCount, NoCategory } from '../../utils'
 
 export const ProductProvider = () => {
     const isMounted = useRef<boolean>(false);
@@ -46,7 +46,7 @@ export const ProductProvider = () => {
             return;
         }
 
-        if (productFilter.categoryCount === 0) {
+        if (productFilter.categoryCount === 0 && productFilter.query === '') {
             resetFilters();
         }
     }, [productFilter.categoryCount]);
@@ -85,7 +85,7 @@ export const ProductProvider = () => {
 
         performFetchCall({
             callMethod: getProductsByRange,
-            callArgs: [ pageConfig.limit, getSkipCount(defaultProductPageConfig.active) ],
+            callArgs: [ DefaultFetchSize, getSkipCount(defaultProductPageConfig.active) ],
             successCallback: onResetProductAPISuccess,
         });
     }
@@ -108,7 +108,7 @@ export const ProductProvider = () => {
 
         const fetchQueryProductArgs = {
             callMethod: getProductsByQuery,
-            callArgs: [ query, pageConfig.limit, getSkipCount(defaultProductPageConfig.active) ],
+            callArgs: [ query, DefaultFetchSize, getSkipCount(defaultProductPageConfig.active) ],
             successCallback: onResetProductAPISuccess,
         };
 

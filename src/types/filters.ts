@@ -31,7 +31,6 @@ export type PageConfigType = {
     active: number;
     lastFetchMin: number;
     lastFetchMax: number;
-    limit: number;
 }
 
 export type PageConfigUpdaterType = (portion: Partial<PageConfigType>) => void

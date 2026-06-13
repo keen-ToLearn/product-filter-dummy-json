@@ -1,6 +1,7 @@
 .product-card {
     all: unset;
     border: 1px solid var(--border);
+    box-shadow: var(--shadow);
     border-radius: 8px;
     cursor: pointer;
 }
