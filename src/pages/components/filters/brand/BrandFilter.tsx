@@ -19,11 +19,19 @@ export const BrandFilter = () => {
         if (isFilteredByCategory) {
             productFilter.categorySet.forEach(category => {
                 const categoryProducts = productMap.get(category)
-                categoryProducts?.forEach(product => brandSet.add(product.brand))
+                categoryProducts?.forEach(product => {
+                    if (product.brand?.length > 0) {
+                        brandSet.add(product.brand)
+                    }
+                })
             })
         } else {
             const allProducts = productMap.get(NoCategory)
-            allProducts?.forEach(product => brandSet.add(product.brand))
+            allProducts?.forEach(product => {
+                if (product.brand?.length > 0) {
+                    brandSet.add(product.brand)
+                }
+            })
         }
 
         setBrandList([ ...brandSet ])

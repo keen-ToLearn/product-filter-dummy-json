@@ -20,10 +20,10 @@ import {
     type ProductSmallData
 } from '../../types/product'
 import { MapActions } from '../../types/enums'
-import { defaultProductFilter } from './config'
+import { defaultProductFilter, defaultProductPageConfig } from './config'
 import { useDebounce, useFetchCalls } from '../../hooks'
 import { getProductsByQuery, getProductsByRange } from '../../api'
-import { DefaultFetchSize, defaultProductPageConfig, getSkipCount, NoCategory } from '../../utils'
+import { DefaultFetchSize, getSkipCount, NoCategory } from '../../utils'
 
 export const ProductProvider = () => {
     const isMounted = useRef<boolean>(false);

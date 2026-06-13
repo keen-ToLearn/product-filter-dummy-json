@@ -1,4 +1,4 @@
-import { type ProductFilter } from '../../types/filters';
+import { type PageConfigType, type ProductFilter } from '../../types/filters';
 
 export const defaultProductFilter: ProductFilter = {
     query: '',
@@ -12,4 +12,11 @@ export const defaultProductFilter: ProductFilter = {
     },
     brandSet: new Set<string>(),
     brandCount: 0,
+}
+
+export const defaultProductPageConfig: PageConfigType = {
+    total: 0,
+    active: 1,
+    lastFetchMin: 1,
+    lastFetchMax: 5,
 }

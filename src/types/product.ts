@@ -19,3 +19,18 @@ export interface ProductListRes {
     skip: number;
     total: number;
 }
+
+export type ReviewType = {
+    rating: number;
+    comment: string;
+    date: string;
+    reviewerName: string;
+    reviewerEmail: string;
+}
+
+export interface ProductFullData extends Omit<ProductSmallData, 'thumbnail'> {
+    category: string;
+    description: string;
+    images: string[];
+    reviews: ReviewType[];
+}

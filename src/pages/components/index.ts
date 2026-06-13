@@ -4,3 +4,4 @@ export * from './drawer';
 export * from './erroralert';
 export * from './productrenderer';
 export * from './pagination';
+export * from './productimagerenderer';
