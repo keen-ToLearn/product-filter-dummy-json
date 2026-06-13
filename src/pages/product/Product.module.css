@@ -21,3 +21,52 @@
     justify-content: space-between;
     gap: 0.5rem;
 }
+
+.detail-info-box {
+    padding: 0 0.5rem 0 1rem;
+    overflow-y: auto;
+}
+
+.detail-info-box h1,
+.detail-info-box h2,
+.detail-info-box h3,
+.detail-info-box h4,
+.detail-info-box h5,
+.detail-info-box h6 {
+    margin: 0;
+}
+
+.cost-box {
+    margin: 2rem 0 1rem;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.brand-desc-box {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--divider);
+}
+
+.brand-desc-box > p {
+    margin: 4px 0;
+}
+
+.desc-title {
+    padding-bottom: 0.5rem;
+}
+
+.review-container {
+    padding: 1rem 0;
+}
+
+.review-container p {
+    margin: 0.5rem 0 0;
+}
+
+.review-box {
+    padding: 1.5rem 0 0;
+}

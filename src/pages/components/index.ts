@@ -5,3 +5,4 @@ export * from './erroralert';
 export * from './productrenderer';
 export * from './pagination';
 export * from './productimagerenderer';
+export * from './rating';

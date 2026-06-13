@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router'
 
+import { Rating } from '../rating'
 import { type ProductCardProps, type RightContentInfoType } from './types'
 
 import styles from './ProductCard.module.css'
@@ -15,7 +16,7 @@ export const ProductCard = ({
     const getRightFooterContent = (rightInfo: RightContentInfoType) => {
         if (rightInfo.contentType === 'rating') {
             return (
-                <span>{rightInfo.content}</span>
+                <Rating content={rightInfo.content} size={'sm'} outof={5} />
             )
         }
 

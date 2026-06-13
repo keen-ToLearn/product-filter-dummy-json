@@ -31,7 +31,7 @@ export const ProductImageRenderer = ({ images }: ProductImageRendererProps) => {
             <figure className={styles['image-display-box']}>
                 <img src={images[detailPageConfig.active - 1]} alt={'Product Image'} />
             </figure>
-            {images.length > 1 && (
+            {images.length > 0 && (
                 <div className={styles['image-page-box']}>
                     <Pagination
                         active={detailPageConfig.active}

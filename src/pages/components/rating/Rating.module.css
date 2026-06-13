@@ -1,0 +1,10 @@
+.rating-flex {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.partial-star-box {
+    position: relative;
+    z-index: -1;
+}
