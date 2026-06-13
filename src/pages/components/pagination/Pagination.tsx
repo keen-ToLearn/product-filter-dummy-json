@@ -18,6 +18,7 @@ export const Pagination = ({
 
     const renderPageButtons = getPageButtonNumbers(active, last, visible).map(num => (
         <button
+            key={num}
             type='button'
             className={`app-btn all-round large ${active === num ? 'primary-btn' : ''} ${styles['page-button']}`}
             onClick={() => handlePageChange(num)}

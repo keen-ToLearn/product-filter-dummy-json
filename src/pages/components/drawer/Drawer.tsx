@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react'
 
 import { SearchInput } from '../input'
-import { CategoryFilter, PriceFilter } from '../filters'
+import { BrandFilter, CategoryFilter, PriceFilter } from '../filters'
 import { ProductContext } from '../../../providers'
 
 import styles from './Drawer.module.css'
@@ -28,6 +28,7 @@ export const Drawer = () => {
             </div>
             <CategoryFilter />
             <PriceFilter />
+            <BrandFilter />
         </aside>
     )
 }

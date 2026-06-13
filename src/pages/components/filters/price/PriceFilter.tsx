@@ -26,7 +26,7 @@ export const PriceFilter = () => {
 
     return (
         <div className={`${filterstyles['filter-container']}`}>
-            <div className={styles['head-box']}>
+            <div className={filterstyles['head-box']}>
                 <h4>Price Range</h4>
                 <em>{'(apply on loaded products)'}</em>
             </div>

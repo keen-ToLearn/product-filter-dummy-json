@@ -129,7 +129,7 @@ export const ProductRenderer = () => {
 
         return (
             <ProductCard
-                key={product.id}
+                key={`${product.id}-${i}`}
                 id={product.id}
                 title={product.title}
                 imageURI={product.thumbnail}

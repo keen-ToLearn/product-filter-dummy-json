@@ -65,7 +65,7 @@ export const CategoryFilter = () => {
             return (
                 <div
                     key={`${category.slug}-${i}`}
-                    className={styles['category-item']}
+                    className={filterstyles['check-item']}
                     onClick={() => handleCategoryCheck(isChecked, category.slug)}
                 >
                     <input type='checkbox' name={category.name} checked={isChecked} readOnly />
