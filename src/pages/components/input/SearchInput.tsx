@@ -5,17 +5,17 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ProductContext } from '../../../providers';
 import { type SearchInputProps } from './types';
 
-import styles from './SearchInput.module.css';
+import styles from './Input.module.css';
 
 export const SearchInput = ({ placeHolder }: SearchInputProps) => {
     const { updateFilterQuery, productFilter } = useContext(ProductContext);
 
     return (
-        <div className={styles['search-field-container']}>
+        <div className={styles['input-field-container']}>
             <input
                 type={'text'}
                 name='search-product'
-                className={styles['search-field']}
+                className={`${styles['input-field']} ${styles['search-field']}`}
                 placeholder={placeHolder}
                 value={productFilter.query}
                 onChange={(event) => updateFilterQuery(event.target.value)}

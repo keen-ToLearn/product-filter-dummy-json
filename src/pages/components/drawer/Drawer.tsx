@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react'
 
-import { SearchInput } from '../searchinput'
-import { CategoryFilter } from '../filters'
+import { SearchInput } from '../input'
+import { CategoryFilter, PriceFilter } from '../filters'
 import { ProductContext } from '../../../providers'
 
 import styles from './Drawer.module.css'
@@ -27,6 +27,7 @@ export const Drawer = () => {
                 <SearchInput placeHolder={'Search...'} />
             </div>
             <CategoryFilter />
+            <PriceFilter />
         </aside>
     )
 }

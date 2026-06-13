@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { SearchInput } from '../searchinput';
+import { SearchInput } from '../input';
 
 import { ProductContext } from '../../../providers';
 

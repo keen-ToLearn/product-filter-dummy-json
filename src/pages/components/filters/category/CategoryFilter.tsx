@@ -9,7 +9,6 @@ import { SetToMapAction } from '../helper';
 
 import filterstyles from '../Filter.module.css';
 import styles from './CategoryFilter.module.css';
-import { defaultProductPageConfig } from '../../../../utils';
 
 export const CategoryFilter = () => {
     const { performFetchCall } = useContext(AppContext);
@@ -17,7 +16,6 @@ export const CategoryFilter = () => {
         productFilter,
         updateFilterCategory,
         updateProductMap,
-        updateProductPageConfig
     } = useContext(ProductContext);
 
     const [categoryList, setCategoryList] = useState<CategoryResType>([]);
@@ -34,13 +32,11 @@ export const CategoryFilter = () => {
     }, []);
 
     const onProductByCategoryAPISuccess = (data: ProductListRes, action: MapActions, category: string) => {
-        updateProductPageConfig(defaultProductPageConfig);
         updateProductMap(action, category, data.products);
     }
 
     const handleCategoryUncheck = (category: string) => {
         updateFilterCategory(SetActions.DELETE, category);
-        updateProductPageConfig(defaultProductPageConfig);
         updateProductMap(SetToMapAction[SetActions.DELETE], category);
     }
 

@@ -126,7 +126,8 @@ export const ProductProvider = () => {
         setProductFilter(filters => ({
             ...filters,
             priceApplied: applied,
-        }))
+        }));
+        updateProductPageConfig(defaultProductPageConfig);
     }
 
     const updateFilterCategory: CategoryUpdaterType = (action, category) => {
@@ -141,6 +142,7 @@ export const ProductProvider = () => {
                 query: defaultProductFilter.query,
             };
         });
+        updateProductPageConfig(defaultProductPageConfig);
     }
 
     const updateFilterBrand: BrandUpdaterType = (action, brand) => {
@@ -154,6 +156,7 @@ export const ProductProvider = () => {
                 brandCount: currentBrandSet.size,
             };
         });
+        updateProductPageConfig(defaultProductPageConfig);
     }
 
     const updateProductPageConfig: PageConfigUpdaterType = (portion) => {

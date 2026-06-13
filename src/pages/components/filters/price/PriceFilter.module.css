@@ -1,0 +1,23 @@
+.head-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 0.5rem;
+}
+
+.head-box > h4 {
+    margin: 0;
+}
+
+.head-box > em {
+    font-size: 12px;
+}
+
+.price-field-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.apply-box {
+    padding: 1rem 0 0.5rem;
+}
