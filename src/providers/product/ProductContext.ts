@@ -1,13 +1,14 @@
 import { createContext } from 'react';
 import { type ProductContextType } from '../type';
+import { defaultProductFilter, defaultProductPageConfig } from './config';
 
 // Default Value of the Product Context
 const defaultProductContextValue: ProductContextType = {
     isDrawerOpen: false,
     toggleDrawer: () => {},
-    productMap: null,
+    productMap: new Map(),
     updateProductMap: () => {},
-    productFilter: null,
+    productFilter: defaultProductFilter,
     resetFilters: () => {},
     isFilterApplied: () => false,
     updateFilterQuery: () => {},
@@ -15,7 +16,7 @@ const defaultProductContextValue: ProductContextType = {
     updateAppliedFilterPrice: () => {},
     updateFilterCategory: () => {},
     updateFilterBrand: () => {},
-    pageConfig: null,
+    pageConfig: defaultProductPageConfig,
     updateProductPageConfig: () => {},
 };
 

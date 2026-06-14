@@ -72,9 +72,9 @@ export const ProductRenderer = () => {
     const onProductPageAPISuccess = (data: ProductSmallData[], limit: number, skip: number) => {
         const allProducts = productMap.get(NoCategory)
         const updatedAllProducts = [
-            ...allProducts.slice(0, skip),
+            ...(allProducts ?? []).slice(0, skip),
             ...data,
-            ...allProducts.slice(limit + skip),
+            ...(allProducts ?? []).slice(limit + skip),
         ]
         updateProductMap(MapActions.SET, NoCategory, updatedAllProducts)
     }

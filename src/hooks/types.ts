@@ -8,3 +8,7 @@ type FetchCallHelperArgsType<D> = {
 }
 
 export type DoFetchCallFuncType = <D>(helper: FetchCallHelperArgsType<D>) => Promise<void>;
+
+export type CodeErrorType = {
+    message: string;
+}

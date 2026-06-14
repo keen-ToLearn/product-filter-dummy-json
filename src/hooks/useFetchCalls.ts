@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { ErrorAlertContext, LoaderContext } from '../providers';
-import { type DoFetchCallFuncType } from './types';
+import { type CodeErrorType, type DoFetchCallFuncType } from './types';
 
 export const useFetchCalls = () => {
     const { toggleLoader } = useContext(LoaderContext);
@@ -27,8 +27,10 @@ export const useFetchCalls = () => {
 
             successCallback(data);
         } catch (error) {
-            if (!silent && error.message) {
-                showErrorMessage(error.message);
+            const message = (error as CodeErrorType).message;
+
+            if (!silent && message) {
+                showErrorMessage(message);
             }
         } finally {
             if (!silent) {

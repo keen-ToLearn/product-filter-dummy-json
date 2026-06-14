@@ -59,13 +59,16 @@ export const ProductProvider = () => {
         setProductMap(productMap => {
             const currentProductMap = new Map(productMap);
 
-            if (action === MapActions.SET) {
+            if (action === MapActions.SET && productList) {
                 currentProductMap[action](category, productList);
             } else if (action === MapActions.DELETE) {
                 currentProductMap[action](category);
             } else if (action === MapActions.CLEAR) {
                 currentProductMap[action]();
-                currentProductMap.set(category, productList);
+
+                if (productList) {
+                    currentProductMap.set(category, productList);
+                }
             }
 
             return currentProductMap;
