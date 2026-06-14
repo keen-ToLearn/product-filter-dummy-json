@@ -1,4 +1,4 @@
-type CallMethodArgsType = string | number;
+type CallMethodArgsType = any;
 
 type FetchCallHelperArgsType<D> = {
     callMethod: (...args: CallMethodArgsType[]) => Promise<Response>;

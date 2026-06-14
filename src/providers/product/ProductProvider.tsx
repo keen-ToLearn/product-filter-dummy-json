@@ -115,7 +115,7 @@ export const ProductProvider = () => {
             successCallback: onResetProductAPISuccess,
         };
 
-        debouncer(performFetchCall, 1000, fetchQueryProductArgs);
+        debouncer(performFetchCall<ProductListRes>, 1000, fetchQueryProductArgs);
     }
 
     const updateFilterPrice: PriceUpdaterType = (key, price) => {

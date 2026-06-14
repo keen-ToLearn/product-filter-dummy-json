@@ -7,9 +7,9 @@ import { type ProductListRes, type ProductSmallData } from '../../../types/produ
 import { getDataRangeForPage, getPageFetchRange, NoCategory, PerPage, VisiblePageCount } from '../../../utils'
 import { useFetchCalls } from '../../../hooks'
 import { getProductsByQuery } from '../../../api'
+import { MapActions } from '../../../types/enums'
 
 import styles from './ProductRenderer.module.css'
-import { MapActions } from '../../../types/enums'
 
 export const ProductRenderer = () => {
     const [products, setProducts] = useState<ProductSmallData[]>([])
@@ -21,6 +21,7 @@ export const ProductRenderer = () => {
         isFilterApplied,
         updateProductPageConfig,
         updateProductMap,
+        isDrawerOpen,
     } = useContext(ProductContext)
 
     const { performFetchCall } = useFetchCalls()
@@ -154,7 +155,7 @@ export const ProductRenderer = () => {
                     handlePageChange={handlePageChange}
                 />
             </div>
-            <div className={styles['product-box']}>
+            <div className={`${styles['product-box']} ${isDrawerOpen ? styles['open'] : ''}`}>
                 {renderProductList}
             </div>
         </div>

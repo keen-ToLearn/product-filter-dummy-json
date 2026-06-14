@@ -6,6 +6,10 @@
     gap: 1rem;
 }
 
+.product-box.open {
+    grid-template-columns: repeat(3, 1fr);
+}
+
 .page-box {
     position: sticky;
     top: 0;
